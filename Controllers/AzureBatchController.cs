@@ -9,15 +9,16 @@ namespace AzureBatchEndpoint.Controllers
         private readonly ILogger<AzureBatchController> _logger = logger;
 
         [HttpGet(Name = "RunAzureBatchEndpointPrediction")]
-        public IEnumerable<WeatherForecast> Get()
+        public IEnumerable<ModelPrediction> Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            return [new ModelPrediction
             {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+                ModelVersion = "404",
+                ModelName = "Not Found",
+                Prediction = "",
+                ModelInputParameterOne = "One",
+                ModelInputParameterTwo = "Two"
+            }];
         }
     }
 }

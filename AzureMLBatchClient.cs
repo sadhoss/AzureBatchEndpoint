@@ -95,7 +95,7 @@ namespace FishHealth.StockPrediction
             var statusJsonResponse = JsonSerializer.Deserialize<JsonElement>(statusBody);
             var jobStatus = statusJsonResponse.GetProperty("properties").GetProperty("status").GetString();
 
-            var result = "NotCompleted";
+            var result = "Pending";
             if (jobStatus == "Completed" || jobStatus == "Failed")
             {
                 result = jobStatus;
