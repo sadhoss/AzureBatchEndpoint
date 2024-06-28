@@ -4,21 +4,21 @@ namespace AzureBatchEndpoint.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class AzureBatchController(ILogger<AzureBatchController> logger) : ControllerBase
+    public class AzureBatchController(ILogger<AzureBatchController> logger, AzureMLBatchService azureMLBatchService) : ControllerBase
     {
         private readonly ILogger<AzureBatchController> _logger = logger;
+        private readonly AzureMLBatchService _azureMLBatchService = azureMLBatchService;
 
-        [HttpGet(Name = "RunAzureBatchEndpointPrediction")]
-        public IEnumerable<ModelPrediction> Get()
+        [HttpPost(Name = "RunAzureBatchEndpointPrediction")]
+        public async Task<ActionResult<string?>> Post()
         {
-            return [new ModelPrediction
-            {
-                ModelVersion = "404",
-                ModelName = "Not Found",
-                Prediction = "",
-                ModelInputParameterOne = "One",
-                ModelInputParameterTwo = "Two"
-            }];
+            return await _azureMLBatchService.RunBatchEndpoint();
+        }
+
+        [HttpGet(Name = "GetAzureBatchEndpointPrediction")]
+        public async Task<ActionResult<ModelPrediction>> Get(string jobId)
+        {
+            return await _azureMLBatchService.GetBatchEndpointPrediction(jobId);
         }
     }
 }
