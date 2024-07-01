@@ -46,7 +46,7 @@ namespace AzureBatchEndpoint
         {
             var csvContent = new StringBuilder();
             csvContent.AppendLine("carat,cut,color,clarity,price");
-            csvContent.AppendLine($"{diamond.Carat},{diamond.Cut},{diamond.Colour},{diamond.Clarity},{diamond.Price}");
+            csvContent.Append($"{diamond.Carat:0.0},{diamond.Cut},{diamond.Colour},{diamond.Clarity},{diamond.Price}");
 
             var inMemoryCsv = new MemoryStream();
             var streamWriter = new StreamWriter(inMemoryCsv, Encoding.UTF8);

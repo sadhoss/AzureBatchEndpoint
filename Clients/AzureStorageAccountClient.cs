@@ -61,20 +61,19 @@ namespace AzureBatchEndpoint.Clients
 
             // Read the content of the MemoryStream into a string variable.
             using var reader = new StreamReader(memoryStream);
-            var header = reader.ReadLine();
             var values = reader.ReadLine();
 
             return new ModelPrediction() 
             {
                 Diamond = new Diamond() 
                 {
-                    Carat = int.Parse(values.Split(",")[2]),
-                    Clarity = values.Split(",")[3],
-                    Colour = values.Split(",")[4],
-                    Cut = values.Split(",")[5]
+                    Carat = int.Parse(values.Split(",")[0]),
+                    Cut = values.Split(",")[2],
+                    Colour = values.Split(",")[3],
+                    Clarity = values.Split(",")[4]
                 },
-                Prediction = values.Split(",")[0]
-            } ;
+                Prediction = values.Split(",")[5]
+            };
         }
     }
 }
