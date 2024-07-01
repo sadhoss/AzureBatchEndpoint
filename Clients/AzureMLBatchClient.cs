@@ -34,7 +34,7 @@ namespace AzureBatchEndpoint.Clients
                 {
                     InputData = new
                     {
-                        HarvestDeviation = new
+                        DiamondPricing = new
                         {
                             JobInputType = "UriFile",
                             Uri = uriFilepath + ".csv"
