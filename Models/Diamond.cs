@@ -2,11 +2,11 @@
 {
     public class Diamond
     {
-        public string Price { get; set; }
+        public int Price { get; set; }
 
         // 4Cs
         public double Carat { get; set; }
-        public string Clearity { get; set; }
+        public string Clarity { get; set; }
         public string Colour { get; set; }
         public string Cut { get; set; }
 

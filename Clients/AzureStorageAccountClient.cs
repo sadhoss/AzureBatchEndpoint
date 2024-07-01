@@ -1,11 +1,12 @@
 ﻿using Azure.Identity;
 using Azure.Storage.Blobs;
+using AzureBatchEndpoint.Models;
 
 namespace AzureBatchEndpoint.Clients
 {
     public record AzureStorageAccountOptions
     {
-        public string TenantId { get; set; } = "fortedigital";
+        public string TenantId { get; set; } = "063afd9e-5fcb-48d2-a769-ca31b0f5b443";
         public string BlobServiceUri { get; set; } = "https://testlabeling8469051483.blob.core.windows.net";
         public string ContainerName { get; set; } = "azureml-blobstore-776dfdfc-058f-488b-96cc-d0eb7797cb77";
         public string FilePath { get; set; } = "Diamond";
@@ -26,7 +27,7 @@ namespace AzureBatchEndpoint.Clients
             _blobServiceClient = new BlobServiceClient(new Uri(_azureStorageAccountOptions.BlobServiceUri), credential);
         }
 
-        public async Task<string> UploadFileToAzureStorageAccountForPrediciton(MemoryStream inMemoryCsv, string filename) 
+        public async Task<string> UploadFileToAzureStorageAccountForPrediction(MemoryStream inMemoryCsv, string filename) 
         {
             var containerClient = _blobServiceClient.GetBlobContainerClient(_azureStorageAccountOptions.ContainerName);
             await containerClient.CreateIfNotExistsAsync();
@@ -42,7 +43,7 @@ namespace AzureBatchEndpoint.Clients
             return filepath;
         }
 
-        public async Task<string> DownloadAndReadPredictionResult(string filepath)
+        public async Task<ModelPrediction> DownloadAndReadPredictionResult(string filepath)
         {
             var containerClient = _blobServiceClient.GetBlobContainerClient(_azureStorageAccountOptions.ContainerName);
             await containerClient.CreateIfNotExistsAsync();
@@ -63,7 +64,17 @@ namespace AzureBatchEndpoint.Clients
             var header = reader.ReadLine();
             var values = reader.ReadLine();
 
-            return values.Split(",")[0];
+            return new ModelPrediction() 
+            {
+                Diamond = new Diamond() 
+                {
+                    Carat = int.Parse(values.Split(",")[2]),
+                    Clarity = values.Split(",")[3],
+                    Colour = values.Split(",")[4],
+                    Cut = values.Split(",")[5]
+                },
+                Prediction = values.Split(",")[0]
+            } ;
         }
     }
 }

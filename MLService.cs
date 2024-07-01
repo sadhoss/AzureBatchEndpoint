@@ -1,6 +1,7 @@
 ﻿using AzureBatchEndpoint.Clients;
 using AzureBatchEndpoint.Models;
 using System.Text;
+using System.Threading.Tasks.Dataflow;
 
 namespace AzureBatchEndpoint
 {
@@ -35,9 +36,9 @@ namespace AzureBatchEndpoint
         {
             using var csvData = ConvertAndFormatData(diamond);
 
-            var filename = $"Diamond_{DateTime.Now}";
+            var filename = $"diamond_{DateTime.Now:yyyy_MM_dd_HH_mm_ss}";
 
-            var filepath = await _azureStorageAccountClient.UploadFileToAzureStorageAccountForPrediciton(csvData, filename);
+            var filepath = await _azureStorageAccountClient.UploadFileToAzureStorageAccountForPrediction(csvData, filename);
 
             return filepath;
         }
@@ -45,11 +46,11 @@ namespace AzureBatchEndpoint
         private static MemoryStream ConvertAndFormatData(Diamond diamond)
         {
             var csvContent = new StringBuilder();
-            csvContent.AppendLine("Price,Carat,Clarity,Colour,Cut");
-            csvContent.AppendLine($"{diamond.Price},{diamond.Carat},{diamond.Clearity},{diamond.Colour},{diamond.Cut}");
+            csvContent.AppendLine("carat,cut,color,clarity,price");
+            csvContent.AppendLine($"{diamond.Carat},{diamond.Cut},{diamond.Colour},{diamond.Clarity},{diamond.Price}");
 
             var inMemoryCsv = new MemoryStream();
-            using var streamWriter = new StreamWriter(inMemoryCsv, Encoding.UTF8);
+            var streamWriter = new StreamWriter(inMemoryCsv, Encoding.UTF8);
             streamWriter.Write(csvContent.ToString());
             streamWriter.Flush();
 
@@ -59,15 +60,17 @@ namespace AzureBatchEndpoint
             return inMemoryCsv;
         }
 
-        public async Task<ModelPrediction> GetPrediction(ModelPrediction modelPrediction)
+        public async Task<ModelPrediction> GetPrediction(string jobId, string filePath)
         {
-            modelPrediction.PredictionStatus = await _azureMLBatchClient.PingJobStatus(modelPrediction.jobId);
+            var predictionStatus = await _azureMLBatchClient.PingJobStatus(jobId);
 
-            if (modelPrediction.PredictionStatus != "Completed")
-                return modelPrediction;
+            if (predictionStatus != "Completed")
+                return new ModelPrediction() { jobId = jobId, FilePath = filePath, PredictionStatus = predictionStatus };
 
-            modelPrediction.Prediction = await _azureStorageAccountClient.DownloadAndReadPredictionResult(modelPrediction.FilePath);
-            return modelPrediction;
+            var modelprediction = await _azureStorageAccountClient.DownloadAndReadPredictionResult(filePath);
+            modelprediction.jobId = jobId;
+            modelprediction.PredictionStatus = predictionStatus;
+            return modelprediction;
         }
     }
 }
