@@ -59,7 +59,7 @@ namespace AzureBatchEndpoint
             return inMemoryCsv;
         }
 
-        public async Task<ModelPrediction> GetBatchEndpointPrediction(ModelPrediction modelPrediction)
+        public async Task<ModelPrediction> GetPrediction(ModelPrediction modelPrediction)
         {
             modelPrediction.PredictionStatus = await _azureMLBatchClient.PingJobStatus(modelPrediction.jobId);
 

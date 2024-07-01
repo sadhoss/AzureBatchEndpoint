@@ -5,10 +5,10 @@ namespace AzureBatchEndpoint.Clients
 {
     public record AzureStorageAccountOptions
     {
-        public string TenantId { get; set; } = "--";
-        public string BlobServiceUri { get; set; } = "";
-        public string ContainerName { get; set; } = "";
-        public string FilePath { get; set; } = "";
+        public string TenantId { get; set; } = "fortedigital";
+        public string BlobServiceUri { get; set; } = "https://testlabeling8469051483.blob.core.windows.net";
+        public string ContainerName { get; set; } = "azureml-blobstore-776dfdfc-058f-488b-96cc-d0eb7797cb77";
+        public string FilePath { get; set; } = "Diamond";
     }
 
     public class AzureStorageAccountClient
@@ -42,13 +42,13 @@ namespace AzureBatchEndpoint.Clients
             return filepath;
         }
 
-        public async Task<string> DownloadAndReadPredictionResult(string filename)
+        public async Task<string> DownloadAndReadPredictionResult(string filepath)
         {
             var containerClient = _blobServiceClient.GetBlobContainerClient(_azureStorageAccountOptions.ContainerName);
             await containerClient.CreateIfNotExistsAsync();
 
             // Get a reference to the BlobClient to interact with the specific blob (file) with the desired path.
-            var filePathIncFileName = _azureStorageAccountOptions.FilePath + "/" + filename + "_predictions.csv";
+            var filePathIncFileName = filepath + "_predictions.csv";
             var blobClient = containerClient.GetBlobClient(filePathIncFileName);
 
             // Download the blob's content to a MemoryStream.

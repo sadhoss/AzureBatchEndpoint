@@ -7,11 +7,11 @@ namespace AzureBatchEndpoint.Clients
 {
     public record AzureMLBatchClientOptions
     {
-        public string TenantId { get; set; } = "--";
-        public string SubscriptionId { get; set; } = "--";
-        public string ResourceGroupName { get; set; } = "--";
-        public string WorkspaceName { get; set; } = "--";
-        public string Datastore { get; set; } = "--";
+        public string TenantId { get; set; } = "fortedigital";
+        public string SubscriptionId { get; set; } = "0e834d8d-36cc-4ec6-b444-a014c2fcae53";
+        public string ResourceGroupName { get; set; } = "SadeghHosseinpoorTestEnv";
+        public string WorkspaceName { get; set; } = "testlabeling";
+        public string Datastore { get; set; } = "workspaceblobstore";
         public string EndpointName { get; set; } = "--";
         public string ApiVersion { get; set; } = "2023-04-01";
         public string EndpointUri { get; set; } = "https://<EndpointName>.norwayeast.inference.ml.azure.com/jobs";

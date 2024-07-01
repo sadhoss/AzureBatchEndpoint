@@ -19,7 +19,7 @@ namespace AzureBatchEndpoint.Controllers
         [HttpGet(Name = "GetAzureBatchEndpointPrediction")]
         public async Task<ActionResult<ModelPrediction>> Get(ModelPrediction modelPrediction)
         {
-            return await _azureMLBatchService.GetBatchEndpointPrediction(modelPrediction);
+            return await _azureMLBatchService.GetPrediction(modelPrediction);
         }
     }
 }
