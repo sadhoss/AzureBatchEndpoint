@@ -2,6 +2,4 @@
 
 
 
-<video width="1280" height="720" controls>
-  <source src="Attachments/AzureBatchEndoint_ModelDeploy.mp4" type="video/mp4">
-</video>
+https://github.com/sadhoss/AzureBatchEndpoint/blob/main/Attachments/AzureBatchEndoint_ModelDeploy.mp4
