@@ -8,7 +8,7 @@ namespace AzureBatchEndpoint.Models
         public DateTime DateOfPrediction { get; set; }
         public string jobId { get; set; }
         public string FilePath { get; set; }
-        public string Prediction { get; set; }
+        public double Prediction { get; set; }
         public string PredictionStatus { get; set; }
     }
 }

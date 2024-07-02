@@ -1,6 +1,8 @@
 ﻿using Azure.Identity;
 using Azure.Storage.Blobs;
 using AzureBatchEndpoint.Models;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using System.Text.Json;
 
 namespace AzureBatchEndpoint.Clients
 {
@@ -61,18 +63,13 @@ namespace AzureBatchEndpoint.Clients
 
             // Read the content of the MemoryStream into a string variable.
             using var reader = new StreamReader(memoryStream);
-            var values = reader.ReadLine();
+            var modelValue = reader.ReadLine();
+            modelValue = modelValue.Replace("'", "\"");
+            var values = JsonSerializer.Deserialize<List<string>>(modelValue);
 
-            return new ModelPrediction() 
+            return new ModelPrediction()
             {
-                Diamond = new Diamond() 
-                {
-                    Carat = int.Parse(values.Split(",")[0]),
-                    Cut = values.Split(",")[2],
-                    Colour = values.Split(",")[3],
-                    Clarity = values.Split(",")[4]
-                },
-                Prediction = values.Split(",")[5]
+                Prediction = double.Parse(values[1])
             };
         }
     }

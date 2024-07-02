@@ -25,7 +25,6 @@ namespace AzureBatchEndpoint
                 Diamond = diamond,
                 FilePath = filepath,
                 DateOfPrediction = DateTime.Now,
-                Prediction = "",
                 PredictionStatus = "Pending",
                 jobId = jobId ?? ""
             };

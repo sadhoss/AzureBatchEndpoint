@@ -12,9 +12,9 @@ namespace AzureBatchEndpoint.Clients
         public string ResourceGroupName { get; set; } = "SadeghHosseinpoorTestEnv";
         public string WorkspaceName { get; set; } = "testlabeling";
         public string Datastore { get; set; } = "workspaceblobstore";
-        public string EndpointName { get; set; } = "testlabeling-xhkqb";
+        public string EndpointName { get; set; } = "testlabeling-zewly";
         public string ApiVersion { get; set; } = "2023-04-01";
-        public string EndpointUri { get; set; } = "https://testlabeling-xhkqb.westeurope.inference.ml.azure.com/jobs";
+        public string EndpointUri { get; set; } = "https://testlabeling-zewly.westeurope.inference.ml.azure.com/jobs";
     }
 
     public class AzureMLBatchClient()
