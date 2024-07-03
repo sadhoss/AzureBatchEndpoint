@@ -58,7 +58,8 @@ The process of splitting the data and training a model is not the focus point in
 3. Provide environment and scoring script. When using Azure ML Workspace, this is handled for you. 
 4. That’s "it". Now your model is ready to serve.
 
-https://github.com/sadhoss/AzureBatchEndpoint/assets/16901477/11dac76a-d8bb-4cee-b238-857364cd0be9
+https://github.com/sadhoss/AzureBatchEndpoint/assets/16901477/a949b5e6-c5c2-4834-b604-590c5eb368d4
+
 
 
 
