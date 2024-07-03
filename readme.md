@@ -23,7 +23,6 @@ Then the user can refrence this file when invoking a rest(batch) endpoint, and d
 The rest endpoint will access the data, process it and save the ouput either at a default lcoation or where the user has requested the ouput to be saved.
 
 <br>  
-<br>  
 
 ---
 
@@ -58,6 +57,12 @@ The process of splitting the data and training a model is not the focus point in
 ## Deploy and Integrate
 
 ### Steps in Azure Machine Learning Workspace | Model Deploy & Hosting
+<details>
+
+<summary>Model Deploy & Hosting</summary>
+
+<br>
+
 1. Register your model in Azure Machine Learning Workspace. (Does not matter if you trained it there or you have your own custom model, you can register it in the model registry either way.)
 2. Use the toolbar in your model view, and select **Deploy->Batch endpoint**. 
 3. Provide environment and scoring script. When using Azure ML Workspace, this is handled for you. 
@@ -65,10 +70,15 @@ The process of splitting the data and training a model is not the focus point in
 
 https://github.com/sadhoss/AzureBatchEndpoint/assets/16901477/a949b5e6-c5c2-4834-b604-590c5eb368d4
 
-
+</details>
 
 
 ### Steps in .Net | Integration & Usage
+
+<details>
+
+<summary>Integration & Usage</summary>
+
 #### 1. Authorization required to invoke batch endpoints | Azure resources
 [How authorization works | Microsoft Learn](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-authenticate-batch-endpoint?view=azureml-api-2&tabs=rest#how-authorization-works) 
 > To invoke a batch endpoint, the user must present a valid Microsoft Entra token representing a security principal. This principal can be a user principal or a service principal. In any case, once an endpoint is invoked, a batch deployment job is created under the identity associated with the token. The identity needs the following permissions in order to successfully create a job:  
@@ -136,3 +146,4 @@ When trying to upload data through code, at least with the nuget package Azure.S
 #### Code extracting the prediction results
 
 
+</details>
