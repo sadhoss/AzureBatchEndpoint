@@ -1,7 +1,7 @@
 ﻿# Azure ML – Deploy and Integrate an ML model using Batch Endpoints 
 
 #### TL:DR  
->This repo includes an example on how to deploy and integrate the usage of an ml model with .Net. Probably the most cost effective cloud deployment strategy for your ml model! Hosted by Azure, serverless, and invokable by rest! Best part, swapping a model is as easy as swapping a URL!  
+>This repo includes an example on how to deploy and integrate the usage of an ml model using .Net. Probably the most cost effective cloud deployment strategy for your ml model! Hosted by Azure, serverless, and invokable by rest! Best part, swapping a model is as easy as swapping a URL!  
 
 <br>  
 
