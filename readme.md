@@ -37,7 +37,7 @@ The process of splitting the data and training a model is not the focus point in
 
 <figure>
   <img src="Attachments/Model_evaluation_test_set.png" alt="Test set results">
-  <figcaption>Figure 2: The results on the test(enseen) set not doing any data enhancing, using the "insert data, get black box out" approach.</figcaption>
+  <figcaption>Figure 2: The results on the test(unseen) set not doing any data enhancing, using the "insert data, get black box out" approach. One might argue there is not more performance to gain.</figcaption>
 </figure>
 
 (If there is interest in the above part, maybe I will add an in-depth section for it.) 
@@ -47,13 +47,24 @@ The process of splitting the data and training a model is not the focus point in
 
 ---
 
-### Deploy and Integrate
+## Deploy and Integrate
 
-**Steps in Azure Machine Learning Workspace | Deploy & Hosting**
+### Steps in Azure Machine Learning Workspace | Deploy & Hosting
 1. Register your model in Azure Machine Learning Workspace. (Does not matter if you trained it there or you have your own custom model, you can register it in the model registry either way.)
 2. Use the toolbar in your model view, and select **Deploy->Batch endpoint**. 
-3. That’s "it". Now you can start using your model.
+3. Provide environment and scoring script. When using Azure ML Workspace, this is handled for you. 
+4. That’s "it". Now you can start using your model.
 
+[Watch the video](Attachments/AzureBatchEndoint_ModelDeploy.mp4)
+
+<video width="600" controls>
+  <source src="Attachments/AzureBatchEndoint_ModelDeploy.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+
+
+1. 
 **Steps in .Net | Integration & Usage**  
 1. Configure access control to Azure resources
 2. Code level authentication - Azure Storage account access
