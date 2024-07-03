@@ -27,8 +27,12 @@ The rest endpoint will access the data, process it and save the ouput either at 
 
 ---
 
-## Repository example case: Dimond Pricing Estimation
-I recently got engaged 🎉, and read a lot about the 4Cs of 💍. So, here is a diamond dataset from [Kaggle](https://www.kaggle.com/datasets/joebeachcapital/diamonds?resource=download). The data includes the 4Cs and some other parameters, including price. Let’s test Azure Batch Endpoint on estimating diamond prices based on the 4Cs.
+## Example Case for Context (Expandable content below)
+<details>
+
+<summary>Repository example case: Dimond Pricing Estimation</summary>
+
+### Repository example case: Dimond Pricing Estimation
 
 #### Model training 
 The process of splitting the data and training a model is not the focus point in this article, but the general gist is as follows:
@@ -45,7 +49,8 @@ The process of splitting the data and training a model is not the focus point in
   <figcaption style="text-align: center;">Figure 2: The results on the test(unseen) set not doing any data enhancing, using the "insert data, get black box out" approach. One might argue there is not more performance to gain.</figcaption>
 </figure>
 
-<br>
+</details>
+
 <br>
 
 ---
