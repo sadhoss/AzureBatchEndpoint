@@ -55,12 +55,12 @@ The process of splitting the data and training a model is not the focus point in
 3. Provide environment and scoring script. When using Azure ML Workspace, this is handled for you. 
 4. That’s "it". Now you can start using your model.
 
-[Watch the video](Attachments/AzureBatchEndoint_ModelDeploy.mp4)
 
-<video width="600" controls>
-  <source src="Attachments/AzureBatchEndoint_ModelDeploy.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+
+
+
+https://github.com/sadhoss/AzureBatchEndpoint/assets/16901477/11dac76a-d8bb-4cee-b238-857364cd0be9
+
 
 
 
