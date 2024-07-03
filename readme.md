@@ -30,9 +30,9 @@ The rest endpoint will access the data, process it and save the ouput either at 
 ## Example Case for Context (Expandable content below)
 <details>
 
-<summary>Repository example case: Dimond Pricing Estimation</summary>
+<summary>Repository example case: Diamond Pricing Estimation</summary>
 
-### Repository example case: Dimond Pricing Estimation
+### Repository example case: Diamond Pricing Estimation
 
 #### Model training 
 The process of splitting the data and training a model is not the focus point in this article, but the general gist is as follows:
