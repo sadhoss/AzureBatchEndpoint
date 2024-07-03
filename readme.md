@@ -74,13 +74,14 @@ https://github.com/sadhoss/AzureBatchEndpoint/assets/16901477/11dac76a-d8bb-4cee
 
 In simple terms you have to have the contributor role on the Azure ML workspace resource to invoke the batch endpoint.
 
-
+---
 #### 2. Authorization on data source | Batch Endpoint | Azure resources
 
+**Azure Machine Learning Workspace | Access**  
 When the batch endpoint is invoked you have to refrence the data you want to perform inferencing on. 
 I am not sure of the limitations of batch endpoint, where it can access data from and where it cannot. 
 However, as it is the Azure ML workspace (AMLW) resource that will access the files, the AMLW needs to be granted read rights. 
-If you wish to avoid struggling with the access control for this, you can use the container stores within the azure storage 
+**If you wish to avoid struggling with the access control for this**, you can use the container stores within the azure storage 
 account associated with the AMLW.    
 It is important to note the AMLW configures access to the container store with its own constraints (as datastores).
 Hence, if you wish to ensure the defualt authorization is enough, data that the batch endpoint is used on needs to be uploaded within the configured AMLW datastores.  
@@ -94,21 +95,37 @@ Finding the location where you need to upload your data can be done this way;
 - Here you are presented with the blob container and the azure storage account.
 
 <figure style="text-align: center;">
-  <img src="Attachments/AMLW_datastore.png" style="max-width: 500px;">
+  <img src="Attachments/AMLW_datastore.png" style="max-width: 300px;">
   <figcaption style="text-align: center;">Figure 3: Overview of datastores associated with the Azure ML Workspace.</figcaption>
 </figure>
 
 <figure style="text-align: center;">
-  <img src="Attachments/AMLW_datastore2.png" style="max-width: 500px;">
-  <figcaption style="text-align: center;">Figure 4: Datastores details.</figcaption>
+  <img src="Attachments/AMLW_datastore2.png" style="max-width: 250px;">
+  <figcaption style="text-align: center;">Figure 4: Datastore details.</figcaption>
 </figure>
 
+<br>
 
-2. Code level authentication - Azure Storage account access
-3. Code level authentication - Azure Machine Learning Workspace / Batch Endpoint access.
-4. Code uploading data
-5. Code Invoking batch endpoint
-6. Code monitoring the model prediction status 
-7. Code extracting the prediction results
+**System Requesting to Upload Data | Access**   
+Now, to the system that would write data to the Azure Storage account the Batch Enpoint would get data from to run inferencing.  
+
+
+I personally would think it would be sufficient with the *contributor* role for the Azure Storage Account to write data, but no.. 
+When trying to upload data through code, at least with the nuget package Azure.Storage.Blobs, you are required to have the **Storage blob data contributor** rights as well. 
+
+---
+
+#### Code level authentication - Azure Storage account access | Azure Machine Learning Workspace / Batch Endpoint access.
+
+
+
+---
+#### Code uploading data
+---
+#### Code Invoking batch endpoint
+---
+#### Code monitoring the model prediction status 
+---
+#### Code extracting the prediction results
 
 
