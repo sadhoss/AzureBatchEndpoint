@@ -13,14 +13,17 @@ Batch endpoints in Azure Machine Learning Workspace lets you process large datas
   <figcaption>Figure 1: An illustration of information flow using Batch Endpoints (<a href="https://learn.microsoft.com/en-us/azure/machine-learning/concept-endpoints-batch?view=azureml-api-2">source</a>).</figcaption>
 </figure>
 
+<br> 
+
+#### Information flow explenation
+TODO add how data is flowing 
+
 Microsoft doc; [What are batch endpoints? - Azure Machine Learning | Microsoft Learn](https://learn.microsoft.com/en-us/azure/machine-learning/concept-endpoints-batch?view=azureml-api-2). BUT, as you will see later, it is somewhat lacking and **incorrect**!! (07.2024)
 
 <br>  
 <br>  
-<br>  
 
 ---
-
 
 ## Repository example case: Dimond Pricing Estimation
 I recently got engaged 🎉, and read a lot about the 4Cs of 💍. So, here is a diamond dataset from [Kaggle](https://www.kaggle.com/datasets/joebeachcapital/diamonds?resource=download). The data includes the 4Cs and some other parameters, including price. Let’s test Azure Batch Endpoint on estimating diamond prices based on the 4Cs.
@@ -49,18 +52,58 @@ The process of splitting the data and training a model is not the focus point in
 
 ## Deploy and Integrate
 
-### Steps in Azure Machine Learning Workspace | Deploy & Hosting
+### Steps in Azure Machine Learning Workspace | Model Deploy & Hosting
 1. Register your model in Azure Machine Learning Workspace. (Does not matter if you trained it there or you have your own custom model, you can register it in the model registry either way.)
 2. Use the toolbar in your model view, and select **Deploy->Batch endpoint**. 
 3. Provide environment and scoring script. When using Azure ML Workspace, this is handled for you. 
-4. That’s "it". Now you can start using your model.
+4. That’s "it". Now your model is ready to serve.
 
 https://github.com/sadhoss/AzureBatchEndpoint/assets/16901477/11dac76a-d8bb-4cee-b238-857364cd0be9
 
 
 
 ### Steps in .Net | Integration & Usage
-1. Configure access control to Azure resources
+#### 1. Authorization required to invoke batch endpoints | Azure resources
+[How authorization works | Microsoft Learn](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-authenticate-batch-endpoint?view=azureml-api-2&tabs=rest#how-authorization-works) 
+> To invoke a batch endpoint, the user must present a valid Microsoft Entra token representing a security principal. This principal can be a user principal or a service principal. In any case, once an endpoint is invoked, a batch deployment job is created under the identity associated with the token. The identity needs the following permissions in order to successfully create a job:  
+✅ Read batch endpoints/deployments.  
+✅ Create jobs in batch inference endpoints/deployment.  
+✅ Create experiments/runs.  
+✅ Read and write from/to data stores.  
+✅ Lists datastore secrets.  
+
+In simple terms you have to have the contributor role on the Azure ML workspace resource to invoke the batch endpoint.
+
+
+#### 2. Authorization on data source | Batch Endpoint | Azure resources
+
+When the batch endpoint is invoked you have to refrence the data you want to perform inferencing on. 
+I am not sure of the limitations of batch endpoint, where it can access data from and where it cannot. 
+However, as it is the Azure ML workspace (AMLW) resource that is trying to access the file, the AMLW needs to be granted read rights to the file. 
+If you wish to avoid struggling with the access control for this, you can use the container stores within the azure storage 
+account associated with the AMLW.    
+It is important to note the AMLW configures access to the container store with its own constriants (as datastores).
+Hence, if you wish to ensure the defualt authorization is enough, data that the batch endpoint is used on needs to be uploaded within the area configured for the AMLW datastores.
+
+
+<div style="display: flex; justify-content: space-between;">
+    <div style="flex: 1; margin-right: 10px;">
+        <img src="Attachments/AMLW_datastore.png" alt="Image 1" style="width: 100%;">
+        <figcaption>Figure 3: Overview of datastores associated with the A ML Workspace.</figcaption>
+    </div>
+    <div style="flex: 1; margin-left: 10px;">
+        <img src="Attachments/AMLW_datastore2.png" alt="Image 2" style="width: 100%;">
+        <figcaption>Figure 4: Overview of datastores associated with the A ML Workspace.</figcaption>
+    </div>
+</div>
+
+<figure>
+  <img src="Attachments/AMLW_datastore.png" alt="Datastores">
+  <figcaption>Figure 3: Overview of datastores associated with the A ML Workspace.</figcaption>
+</figure>
+
+
+
 2. Code level authentication - Azure Storage account access
 3. Code level authentication - Azure Machine Learning Workspace / Batch Endpoint access.
 4. Code uploading data
