@@ -88,20 +88,14 @@ Hence, if you wish to ensure the defualt authorization is enough, data that the 
 
 <div style="display: flex; justify-content: space-between;">
     <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <img src="Attachments/AMLW_datastore.png" alt="Image 1" style="max-width: 300px; max-height: 250px;">
+        <img src="Attachments/AMLW_datastore.png" style="width: 90%;">
         <figcaption>Figure 3: Overview of datastores associated with the A ML Workspace.</figcaption>
     </div>
     <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <img src="Attachments/AMLW_datastore2.png" alt="Image 2" style="max-width: 300px; max-height: 450px;">
-        <figcaption>Figure 4: Overview of datastores associated with the A ML Workspace.</figcaption>
+        <img src="Attachments/AMLW_datastore2.png" style="width: 70%;">
+        <figcaption>Figure 4: Datastores details.</figcaption>
     </div>
 </div>
-
-<figure>
-  <img src="Attachments/AMLW_datastore.png" alt="Datastores">
-  <figcaption>Figure 3: Overview of datastores associated with the A ML Workspace.</figcaption>
-</figure>
-
 
 
 2. Code level authentication - Azure Storage account access
