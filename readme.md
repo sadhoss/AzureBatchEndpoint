@@ -33,7 +33,7 @@ The process of splitting the data and training a model is not the focus point in
 	b.	Configure their auto ml service
 	c.	Initiate the model training
 	d.	Evaluate model performance
-	e.	Use model  
+	e.	Model ready to use
 
 <figure>
   <img src="Attachments/Model_evaluation_test_set.png" alt="Test set results">
@@ -55,17 +55,11 @@ The process of splitting the data and training a model is not the focus point in
 3. Provide environment and scoring script. When using Azure ML Workspace, this is handled for you. 
 4. That’s "it". Now you can start using your model.
 
-
-
-
-
 https://github.com/sadhoss/AzureBatchEndpoint/assets/16901477/11dac76a-d8bb-4cee-b238-857364cd0be9
 
 
 
-
-1. 
-**Steps in .Net | Integration & Usage**  
+### Steps in .Net | Integration & Usage
 1. Configure access control to Azure resources
 2. Code level authentication - Azure Storage account access
 3. Code level authentication - Azure Machine Learning Workspace / Batch Endpoint access.
