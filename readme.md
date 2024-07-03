@@ -105,6 +105,7 @@ Finding the location where you need to upload your data can be done this way;
 </figure>
 
 <br>
+<br>
 
 **System Requesting to Upload Data | Access**   
 Now, to the system that would write data to the Azure Storage account the Batch Enpoint would get data from to run inferencing.  
