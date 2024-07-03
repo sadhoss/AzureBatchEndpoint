@@ -10,7 +10,7 @@ Batch endpoints in Azure Machine Learning Workspace lets you process large datas
 
 <figure>
   <img src="Attachments/BatchEndpointFlow.png" alt="Data flow in Batch Endpoint">
-  <figcaption>Figure 1: An illustration of information flow using Batch Endpoints (<a href="https://learn.microsoft.com/en-us/azure/machine-learning/concept-endpoints-batch?view=azureml-api-2">source</a>).</figcaption>
+  <figcaption style="text-align: center;">Figure 1: An illustration of information flow using Batch Endpoints (<a href="https://learn.microsoft.com/en-us/azure/machine-learning/concept-endpoints-batch?view=azureml-api-2">source</a>).</figcaption>
 </figure>
 
 <br> 
@@ -40,7 +40,7 @@ The process of splitting the data and training a model is not the focus point in
 
 <figure>
   <img src="Attachments/Model_evaluation_test_set.png" alt="Test set results">
-  <figcaption>Figure 2: The results on the test(unseen) set not doing any data enhancing, using the "insert data, get black box out" approach. One might argue there is not more performance to gain.</figcaption>
+  <figcaption style="text-align: center;">Figure 2: The results on the test(unseen) set not doing any data enhancing, using the "insert data, get black box out" approach. One might argue there is not more performance to gain.</figcaption>
 </figure>
 
 (If there is interest in the above part, maybe I will add an in-depth section for it.) 
@@ -79,23 +79,29 @@ In simple terms you have to have the contributor role on the Azure ML workspace 
 
 When the batch endpoint is invoked you have to refrence the data you want to perform inferencing on. 
 I am not sure of the limitations of batch endpoint, where it can access data from and where it cannot. 
-However, as it is the Azure ML workspace (AMLW) resource that is trying to access the file, the AMLW needs to be granted read rights to the file. 
+However, as it is the Azure ML workspace (AMLW) resource that will access the files, the AMLW needs to be granted read rights. 
 If you wish to avoid struggling with the access control for this, you can use the container stores within the azure storage 
 account associated with the AMLW.    
-It is important to note the AMLW configures access to the container store with its own constriants (as datastores).
-Hence, if you wish to ensure the defualt authorization is enough, data that the batch endpoint is used on needs to be uploaded within the area configured for the AMLW datastores.
+It is important to note the AMLW configures access to the container store with its own constraints (as datastores).
+Hence, if you wish to ensure the defualt authorization is enough, data that the batch endpoint is used on needs to be uploaded within the configured AMLW datastores.  
 
+<br>
 
-<div style="display: flex; justify-content: space-between;">
-    <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <img src="Attachments/AMLW_datastore.png" style="width: 90%;">
-        <figcaption>Figure 3: Overview of datastores associated with the A ML Workspace.</figcaption>
-    </div>
-    <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <img src="Attachments/AMLW_datastore2.png" style="width: 70%;">
-        <figcaption>Figure 4: Datastores details.</figcaption>
-    </div>
-</div>
+Finding the location where you need to upload your data can be done this way; 
+- From within the AML workspace, find, on the left side menu, the Data page. 
+- From within the Data page, navigate to the datastore pane 
+- Select a datastore
+- Here you are presented with the blob container and the azure storage account.
+
+<figure style="text-align: center;">
+  <img src="Attachments/AMLW_datastore.png" style="max-width: 500px;">
+  <figcaption style="text-align: center;">Figure 3: Overview of datastores associated with the Azure ML Workspace.</figcaption>
+</figure>
+
+<figure style="text-align: center;">
+  <img src="Attachments/AMLW_datastore2.png" style="max-width: 500px;">
+  <figcaption style="text-align: center;">Figure 4: Datastores details.</figcaption>
+</figure>
 
 
 2. Code level authentication - Azure Storage account access
