@@ -6,7 +6,9 @@
 <br>  
 
 #### Deploy Technology | Azure ML Batch Endpoint    
-Batch endpoints in Azure Machine Learning Workspace lets you process large datasets efficiently by running predictions in the background. It streamlines your workflow by automating and scheduling tasks, so you can sit back, relax, and maybe even grab a coffee while the magic happens.
+Batch endpoints in Azure Machine Learning Workspace lets you process large datasets efficiently by running predictions in the background. It streamlines your workflow by automating and scheduling tasks, so you can sit back, relax, and maybe even grab a coffee while the magic happens.  
+
+Microsoft doc; [What are batch endpoints? - Azure Machine Learning | Microsoft Learn](https://learn.microsoft.com/en-us/azure/machine-learning/concept-endpoints-batch?view=azureml-api-2). BUT, as you will see later, it is somewhat lacking and **incorrect**!! (07.2024)
 
 <figure>
   <img src="Attachments/BatchEndpointFlow.png" alt="Data flow in Batch Endpoint">
@@ -16,9 +18,9 @@ Batch endpoints in Azure Machine Learning Workspace lets you process large datas
 <br> 
 
 #### Information flow explenation
-TODO add how data is flowing 
-
-Microsoft doc; [What are batch endpoints? - Azure Machine Learning | Microsoft Learn](https://learn.microsoft.com/en-us/azure/machine-learning/concept-endpoints-batch?view=azureml-api-2). BUT, as you will see later, it is somewhat lacking and **incorrect**!! (07.2024)
+Batch Endpoint allows you to run model inferencing on a schedule. This is facilitated (approach detailed below) by allowing the user to save data in a csv file at a location available over the network. 
+Then the user can refrence this file when invoking a rest(batch) endpoint, and detail what location the resulting output should be saved. 
+The rest endpoint will access the data, process it and save the ouput either at a default lcoation or where the user has requested the ouput to be saved.
 
 <br>  
 <br>  
@@ -42,8 +44,6 @@ The process of splitting the data and training a model is not the focus point in
   <img src="Attachments/Model_evaluation_test_set.png" alt="Test set results">
   <figcaption style="text-align: center;">Figure 2: The results on the test(unseen) set not doing any data enhancing, using the "insert data, get black box out" approach. One might argue there is not more performance to gain.</figcaption>
 </figure>
-
-(If there is interest in the above part, maybe I will add an in-depth section for it.) 
 
 <br>
 <br>
