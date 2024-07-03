@@ -88,11 +88,11 @@ Hence, if you wish to ensure the defualt authorization is enough, data that the 
 
 <div style="display: flex; justify-content: space-between;">
     <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <img src="Attachments/AMLW_datastore.png" alt="Image 1" style="width: 50%; max-height: 50vh;">
+        <img src="Attachments/AMLW_datastore.png" alt="Image 1" style="max-width: 80%; max-height: 100%;">
         <figcaption>Figure 3: Overview of datastores associated with the A ML Workspace.</figcaption>
     </div>
     <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <img src="Attachments/AMLW_datastore2.png" alt="Image 2" style="width: 50%;">
+        <img src="Attachments/AMLW_datastore2.png" alt="Image 2" style="max-width: 80%; max-height: 100%;">
         <figcaption>Figure 4: Overview of datastores associated with the A ML Workspace.</figcaption>
     </div>
 </div>
