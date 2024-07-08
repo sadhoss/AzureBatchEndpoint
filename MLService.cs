@@ -12,10 +12,6 @@ namespace AzureBatchEndpoint
         public async Task<ModelPrediction> Predict(Diamond diamond) 
         {
             var filepath = await ConvertAndUpload(diamond);
-
-            // depending of network speed, fileupload might not be done before model invocation
-            await Task.Delay(2000); // 2 seconds
-
             var jobId = await _azureMLBatchClient.InvokeBatchEndpoint(filepath);
 
             return new ModelPrediction() 
