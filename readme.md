@@ -127,14 +127,19 @@ Finding the location where you need to upload your data can be done this way;
 Now, to the system that would write data to the Azure Storage account the Batch Enpoint would get data from to run inferencing.  
 
 
-I personally would think it would be sufficient with the *contributor* role for the Azure Storage Account to write data, but no.. 
+I assumed it would be sufficient with the *contributor* role for the Azure Storage Account to write data, but no.. 
 When trying to upload data through code, at least with the nuget package Azure.Storage.Blobs, you are required to have the **Storage blob data contributor** rights as well. 
 
 ---
 
-#### Code level authentication - Azure Storage account access | Azure Machine Learning Workspace / Batch Endpoint access.
-
-
+#### Code level authentication - Azure Storage account | Azure ML Workspace / Batch Endpoint | Access.
+We can get an authorization token during runtime by using the Azure.Identity nuget package. 
+We only need to refrence the tenantId where the resources are provisioned and the user access is defined, the rest is automated by the library, with its [DefaultAzureCredential](https://learn.microsoft.com/en-us/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#defaultazurecredential) tool.
+This tool loops through sevral locations where the credential info might be located. The simplest approach to configure the authorization in dev env would be to use the Azure CLI in combination with DefaultAzureCredential:
+```
+6. Azure CLI - If the developer has authenticated an account via the Azure CLI az login command, 
+the DefaultAzureCredential will authenticate with that account.
+```
 
 ---
 #### Code uploading data
@@ -147,3 +152,12 @@ When trying to upload data through code, at least with the nuget package Azure.S
 
 
 </details>
+
+
+#### Code uploading data
+---
+#### Code Invoking batch endpoint
+---
+#### Code monitoring the model prediction status 
+---
+#### Code extracting the prediction results
