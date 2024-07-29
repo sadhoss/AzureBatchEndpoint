@@ -142,11 +142,14 @@ the DefaultAzureCredential will authenticate with that account.
 ```
 
 ---
-#### Code uploading data
+#### Code uploading data & downloading the prediction data
 
 In order to perfrom prediction on some data we have, we need to upload it somewhere the service has access. 
-When uploading the data to an Azure Storage Account, the simplest appraoch is possibly by using the *Azure.Storage.Blobs* nuget package. 
-authorizing the client with the above method, enables easy uploading of data.
+When uploading the data to an Azure Storage Account, the simplest approach is using the *Azure.Storage.Blobs* nuget package. 
+authorizing the client with the above method, enables easy uploading of data.  
+
+When the Batch Endpoint has been invoked and finished running on the data, you can configure it to save the data in the same location.  
+Allowing for simple downloading of files with the same nuget package. 
 
 ---
 #### Code Invoking batch endpoint
@@ -223,15 +226,9 @@ var requestBody = new
 
 ---
 #### Code monitoring the model prediction status 
----
-#### Code extracting the prediction results
-
 
 </details>
 
 #### Code monitoring the model prediction status 
 
-
----
-#### Code extracting the prediction results
 
