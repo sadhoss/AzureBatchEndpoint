@@ -1,7 +1,6 @@
 ﻿using Azure.Identity;
 using Azure.Storage.Blobs;
 using AzureBatchEndpoint.Models;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System.Text.Json;
 
 namespace AzureBatchEndpoint.Clients

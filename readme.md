@@ -143,6 +143,11 @@ the DefaultAzureCredential will authenticate with that account.
 
 ---
 #### Code uploading data
+
+In order to perfrom prediction on some data we have, we need to upload it somewhere the service has access. 
+When uploading the data to an Azure Storage Account, the simplest appraoch is possibly by using the *Azure.Storage.Blobs* nuget package. 
+authorizing the client with the above method, enables easy uploading of data.
+
 ---
 #### Code Invoking batch endpoint
 ---
@@ -153,10 +158,22 @@ the DefaultAzureCredential will authenticate with that account.
 
 </details>
 
-
-#### Code uploading data
 ---
 #### Code Invoking batch endpoint
+
+The batch endpoint as mentioned is invoked by a REST endpoint. 
+The invocation consists of three parts:
+1. Ah HttpClient with configured with correct access. 
+   > This is done as explained above for the storage account access.
+2. The endpoint URL required to activate the batch endpoint.
+   > This can be found in the overview page of the endpoint: <figure>
+	  <img src="Attachments/AMLW_batchEndpoint.png">
+	  <figcaption style="text-align: center;">Figure 5: Endpoint Overview.</figcaption>
+	</figure>
+3. The endpoint body, with metadata on where data can be found and optionally where to save the prediction.
+   > 
+
+
 ---
 #### Code monitoring the model prediction status 
 ---

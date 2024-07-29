@@ -21,6 +21,23 @@ namespace AzureBatchEndpoint.Clients
     {
         private readonly AzureMLBatchClientOptions _azureMLBatchClientOptions = new();
 
+        private async Task<HttpClient> InitializeHttpClient()
+        {
+            // Authenticate and get an access token
+            var credential = new DefaultAzureCredential(new DefaultAzureCredentialOptions()
+            {
+                TenantId = _azureMLBatchClientOptions.TenantId,
+            });
+
+            var tokenRequestContext = new Azure.Core.TokenRequestContext(["https://ml.azure.com"]);
+            var token = await credential.GetTokenAsync(tokenRequestContext);
+
+            var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.Token);
+
+            return httpClient;
+        }
+
         public async Task<string?> InvokeBatchEndpoint(string filepath)
         {
             using var batchEndpointClient = await InitializeHttpClient();
@@ -62,23 +79,6 @@ namespace AzureBatchEndpoint.Clients
             var jobId = jsonResponse.GetProperty("name").GetString();
 
             return jobId;
-        }
-
-        private async Task<HttpClient> InitializeHttpClient()
-        {
-            // Authenticate and get an access token
-            var credential = new DefaultAzureCredential(new DefaultAzureCredentialOptions()
-            {
-                TenantId = _azureMLBatchClientOptions.TenantId,
-            });
-
-            var tokenRequestContext = new Azure.Core.TokenRequestContext(["https://ml.azure.com"]);
-            var token = await credential.GetTokenAsync(tokenRequestContext);
-
-            var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.Token);
-
-            return httpClient;
         }
 
         public async Task<string> PingJobStatus(string jobId)
