@@ -150,16 +150,6 @@ authorizing the client with the above method, enables easy uploading of data.
 
 ---
 #### Code Invoking batch endpoint
----
-#### Code monitoring the model prediction status 
----
-#### Code extracting the prediction results
-
-
-</details>
-
----
-#### Code Invoking batch endpoint
 
 The batch endpoint as mentioned is invoked by a REST endpoint. 
 The invocation consists of three parts:
@@ -170,11 +160,78 @@ The invocation consists of three parts:
 	  <img src="Attachments/AMLW_batchEndpoint.png">
 	  <figcaption style="text-align: center;">Figure 5: Endpoint Overview.</figcaption>
 	</figure>
-3. The endpoint body, with metadata on where data can be found and optionally where to save the prediction.
-   > 
+3. The endpoint body, with metadata on where data can be found and optionally where to save the prediction. It is possible to configure the body with several storage options, but as we decided using the datastore option, I will cover this here.   
+   > The microsoft doc got some errors on this: Microsoft doc; [Input data from data stores - Batch Endpoints | Microsoft Learn](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-access-data-batch-endpoints-jobs?view=azureml-api-2&tabs=rest#input-data-from-data-stores) (07.2024).   
+   > We need to update the uri-template in the template for the batch endpoint to work.
+
+**MS Doc | Incorrect Template**
+```
+{
+    "properties": {  
+        "InputData": {  
+            "heart_dataset": {
+                "JobInputType" : "UriFolder",
+                "Uri": "azureml:/subscriptions/<subscription>/resourceGroups/<resource-group/providers/Microsoft.MachineLearningServices/workspaces/<workspace>/datastores/<data-store>/paths/<data-path>"
+            }
+        }
+    }
+}
+```
+
+**Correct Template**
+```
+{
+    "properties": {  
+        "InputData": {  
+            "heart_dataset": {
+                "JobInputType" : "UriFolder",
+                "Uri": "azureml://subscriptions/<subscription>/resourcegroups/<resource-group>/workspaces/<workspace>/datastores/<data-store>/paths/<data-path>"
+            }
+        }
+    }
+}
+```
+
+In the output template you can configure the prediction file name as well. Below, code snippet from repo code, filename: AzureMLBatchClient.cs. 
+
+```
+// Prepare the request body
+var requestBody = new
+{
+    properties = new
+    {
+        InputData = new
+        {
+            DiamondPricing = new
+            {
+                JobInputType = "UriFile",
+                Uri = uriFilepath + ".csv"
+            }
+        },
+        OutputData = new
+        {
+            score = new
+            {
+                JobOutputType = "UriFile",
+                Uri = uriFilepath + "_predictions.csv"
+            }
+        }
+    }
+};
+```
 
 
 ---
 #### Code monitoring the model prediction status 
 ---
 #### Code extracting the prediction results
+
+
+</details>
+
+#### Code monitoring the model prediction status 
+
+
+---
+#### Code extracting the prediction results
+
