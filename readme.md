@@ -17,10 +17,10 @@ Microsoft doc; [What are batch endpoints? - Azure Machine Learning | Microsoft L
 
 <br> 
 
-#### Information flow explenation
+#### Information flow explanation
 Batch Endpoint allows you to run model inferencing on a schedule. This is facilitated (approach detailed below) by allowing the user to save data in a csv file at a location available over the network. 
-Then the user can refrence this file when invoking a rest(batch) endpoint, and detail what location the resulting output should be saved. 
-The rest endpoint will access the data, process it and save the ouput either at a default lcoation or where the user has requested the ouput to be saved.
+Then the user can reference this file when invoking a rest(batch) endpoint, and detail what location the resulting output should be saved. 
+The rest endpoint will access the data, process it and save the output either at a default location or where the user has requested the output to be saved.
 
 <br>  
 
@@ -94,13 +94,13 @@ In simple terms you have to have the contributor role on the Azure ML workspace 
 #### 2. Authorization on data source | Batch Endpoint | Azure resources
 
 **Azure Machine Learning Workspace | Access**  
-When the batch endpoint is invoked you have to refrence the data you want to perform inferencing on. 
+When the batch endpoint is invoked you have to reference the data you want to perform inferencing on. 
 I am not sure of the limitations of batch endpoint, where it can access data from and where it cannot. 
 However, as it is the Azure ML workspace (AMLW) resource that will access the files, the AMLW needs to be granted read rights. 
 **If you wish to avoid struggling with the access control for this**, you can use the container stores within the azure storage 
 account associated with the AMLW.    
 It is important to note the AMLW configures access to the container store with its own constraints (as datastores).
-Hence, if you wish to ensure the defualt authorization is enough, data that the batch endpoint is used on needs to be uploaded within the configured AMLW datastores.  
+Hence, if you wish to ensure the default authorization is enough, data that the batch endpoint is used on needs to be uploaded within the configured AMLW datastores.  
 
 <br>
 
@@ -134,8 +134,8 @@ When trying to upload data through code, at least with the nuget package Azure.S
 
 #### Code level authentication - Azure Storage account | Azure ML Workspace / Batch Endpoint | Access.
 We can get an authorization token during runtime by using the Azure.Identity nuget package. 
-We only need to refrence the tenantId where the resources are provisioned and the user access is defined, the rest is automated by the library, with its [DefaultAzureCredential](https://learn.microsoft.com/en-us/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#defaultazurecredential) tool.
-This tool loops through sevral locations where the credential info might be located. The simplest approach to configure the authorization in dev env would be to use the Azure CLI in combination with DefaultAzureCredential:
+We only need to reference the tenantId where the resources are provisioned and the user access is defined, the rest is automated by the library, with its [DefaultAzureCredential](https://learn.microsoft.com/en-us/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#defaultazurecredential) tool.
+This tool loops through several locations where the credential info might be located. The simplest approach to configure the authorization in dev env would be to use the Azure CLI in combination with DefaultAzureCredential:
 ```
 6. Azure CLI - If the developer has authenticated an account via the Azure CLI az login command, 
 the DefaultAzureCredential will authenticate with that account.
@@ -144,7 +144,7 @@ the DefaultAzureCredential will authenticate with that account.
 ---
 #### Code uploading data & downloading the prediction data
 
-In order to perfrom prediction on some data we have, we need to upload it somewhere the service has access. 
+In order to perform prediction on some data we have, we need to upload it somewhere the service has access. 
 When uploading the data to an Azure Storage Account, the simplest approach is using the *Azure.Storage.Blobs* nuget package. 
 authorizing the client with the above method, enables easy uploading of data.  
 
@@ -231,4 +231,15 @@ var requestBody = new
 
 #### Code monitoring the model prediction status 
 
+A batch job is preferable when running predictions is done asynchronously and in large quantity. This allows for variable wait time for server booting and job running. 
+The challenge introduced through such an implementation is that there is no confirmation when the job is finished, either failed or completed. 
+Hence, in order to get an overview of the job progress we need to query for it regularly.   
 
+This can be done by using the same batchEndpoint URI and include the jobId returned when invoking the endpoint.
+``` 
+var statusUrl = _azureMLBatchClientOptions.EndpointUri + $"/{jobId}";
+
+var statusBody = await statusResponse.Content.ReadAsStringAsync();
+var statusJsonResponse = JsonSerializer.Deserialize<JsonElement>(statusBody);
+var jobStatus = statusJsonResponse.GetProperty("properties").GetProperty("status").GetString();
+```
