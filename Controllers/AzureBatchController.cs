@@ -10,13 +10,13 @@ namespace AzureBatchEndpoint.Controllers
         private readonly ILogger<AzureBatchController> _logger = logger;
         private readonly MLService _azureMLBatchService = azureMLBatchService;
 
-        [HttpPost(Name = "RunAzureBatchEndpointPrediction")]
+        [HttpPost(Name = "RunPrediction")]
         public async Task<ActionResult<ModelPrediction>> Post(Diamond diamond)
         {
             return await _azureMLBatchService.Predict(diamond);
         }
 
-        [HttpGet(Name = "GetAzureBatchEndpointPrediction")]
+        [HttpGet(Name = "GetPrediction")]
         public async Task<ActionResult<ModelPrediction>> Get(string jobId, string filePath)
         {
             return await _azureMLBatchService.GetPrediction(jobId, filePath);
