@@ -132,7 +132,7 @@ When trying to upload data through code, at least with the nuget package Azure.S
 
 ---
 
-#### Code level authentication - Azure Storage account | Azure ML Workspace / Batch Endpoint | Access.
+#### 3. Code level authentication - Azure Storage account | Azure ML Workspace / Batch Endpoint | Access.
 We can get an authorization token during runtime by using the Azure.Identity nuget package. 
 We only need to reference the tenantId where the resources are provisioned and the user access is defined, the rest is automated by the library, with its [DefaultAzureCredential](https://learn.microsoft.com/en-us/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#defaultazurecredential) tool.
 This tool loops through several locations where the credential info might be located. The simplest approach to configure the authorization in dev env would be to use the Azure CLI in combination with DefaultAzureCredential:
@@ -142,7 +142,7 @@ the DefaultAzureCredential will authenticate with that account.
 ```
 
 ---
-#### Code uploading data & downloading the prediction data
+#### 4. Code uploading data & downloading the prediction data
 
 In order to perform prediction on some data we have, we need to upload it somewhere the service has access. 
 When uploading the data to an Azure Storage Account, the simplest approach is using the *Azure.Storage.Blobs* nuget package. 
@@ -152,7 +152,7 @@ When the Batch Endpoint has been invoked and finished running on the data, you c
 Allowing for simple downloading of files with the same nuget package. 
 
 ---
-#### Code Invoking batch endpoint
+#### 5. Code Invoking batch endpoint
 
 The batch endpoint as mentioned is invoked by a REST endpoint. 
 The invocation consists of three parts:
@@ -225,7 +225,7 @@ var requestBody = new
 
 
 ---
-#### Code monitoring the model prediction status 
+#### 6. Code monitoring the model prediction status 
 
 A batch job is preferable when running predictions is done asynchronously and in large quantity. This allows for variable wait time for server booting and job running. 
 The challenge introduced through such an implementation is that there is no confirmation when the job is finished, either failed or completed. 
