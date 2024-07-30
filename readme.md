@@ -227,10 +227,6 @@ var requestBody = new
 ---
 #### Code monitoring the model prediction status 
 
-</details>
-
-#### Code monitoring the model prediction status 
-
 A batch job is preferable when running predictions is done asynchronously and in large quantity. This allows for variable wait time for server booting and job running. 
 The challenge introduced through such an implementation is that there is no confirmation when the job is finished, either failed or completed. 
 Hence, in order to get an overview of the job progress we need to query for it regularly.   
@@ -243,3 +239,5 @@ var statusBody = await statusResponse.Content.ReadAsStringAsync();
 var statusJsonResponse = JsonSerializer.Deserialize<JsonElement>(statusBody);
 var jobStatus = statusJsonResponse.GetProperty("properties").GetProperty("status").GetString();
 ```
+
+</details>
