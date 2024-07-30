@@ -44,7 +44,7 @@ namespace AzureBatchEndpoint.Clients
             return filepath;
         }
 
-        public async Task<ModelPrediction> DownloadAndReadPredictionResult(string filepath)
+        public async Task<PostModelPrediction> DownloadAndReadPredictionResult(string filepath)
         {
             var containerClient = _blobServiceClient.GetBlobContainerClient(_azureStorageAccountOptions.ContainerName);
             await containerClient.CreateIfNotExistsAsync();
@@ -66,7 +66,7 @@ namespace AzureBatchEndpoint.Clients
             modelValue = modelValue.Replace("'", "\"");
             var values = JsonSerializer.Deserialize<List<string>>(modelValue);
 
-            return new ModelPrediction()
+            return new PostModelPrediction()
             {
                 Prediction = double.Parse(values[1])
             };

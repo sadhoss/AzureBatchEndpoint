@@ -9,16 +9,16 @@ namespace AzureBatchEndpoint
         private readonly AzureMLBatchClient _azureMLBatchClient = azureMLBatchClient;
         private readonly AzureStorageAccountClient _azureStorageAccountClient = azureStorageAccountClient;
 
-        public async Task<ModelPrediction> Predict(Diamond diamond) 
+        public async Task<PreModelPrediction> Predict(UnpraisedDiamond unpraisedDiamond) 
         {
-            var filepath = await ConvertAndUpload(diamond);
+            var filepath = await ConvertAndUpload(unpraisedDiamond);
             var jobId = await _azureMLBatchClient.InvokeBatchEndpoint(filepath);
 
-            return new ModelPrediction() 
+            return new PreModelPrediction() 
             {
                 ModelName = "Not Found",
                 ModelVersion = "404",
-                Diamond = diamond,
+                UnpraisedDiamond = unpraisedDiamond,
                 FilePath = filepath,
                 DateOfPrediction = DateTime.Now,
                 PredictionStatus = "Pending",
@@ -26,9 +26,9 @@ namespace AzureBatchEndpoint
             };
         }
 
-        private async Task<string> ConvertAndUpload(Diamond diamond)
+        private async Task<string> ConvertAndUpload(UnpraisedDiamond unpraisedDiamond)
         {
-            using var csvData = ConvertAndFormatData(diamond);
+            using var csvData = ConvertAndFormatData(unpraisedDiamond);
 
             var filename = $"diamond_{DateTime.Now:yyyy_MM_dd_HH_mm_ss}";
 
@@ -37,11 +37,11 @@ namespace AzureBatchEndpoint
             return filepath;
         }
 
-        private static MemoryStream ConvertAndFormatData(Diamond diamond)
+        private static MemoryStream ConvertAndFormatData(UnpraisedDiamond unpraisedDiamond)
         {
             var csvContent = new StringBuilder();
             csvContent.AppendLine("carat,cut,color,clarity,price");
-            csvContent.Append($"{diamond.Carat:0.0},{diamond.Cut},{diamond.Colour},{diamond.Clarity},{diamond.Price}");
+            csvContent.Append($"{unpraisedDiamond.Carat:0.0},{unpraisedDiamond.Cut},{unpraisedDiamond.Colour},{unpraisedDiamond.Clarity},0");
 
             var inMemoryCsv = new MemoryStream();
             var streamWriter = new StreamWriter(inMemoryCsv, Encoding.UTF8);
@@ -54,12 +54,12 @@ namespace AzureBatchEndpoint
             return inMemoryCsv;
         }
 
-        public async Task<ModelPrediction> GetPrediction(string jobId, string filePath)
+        public async Task<PostModelPrediction> GetPrediction(string jobId, string filePath)
         {
             var predictionStatus = await _azureMLBatchClient.PingJobStatus(jobId);
 
             if (predictionStatus != "Completed")
-                return new ModelPrediction() { jobId = jobId, FilePath = filePath, PredictionStatus = predictionStatus };
+                return new PostModelPrediction() { jobId = jobId, FilePath = filePath, PredictionStatus = predictionStatus };
 
             var modelprediction = await _azureStorageAccountClient.DownloadAndReadPredictionResult(filePath);
             modelprediction.jobId = jobId;
