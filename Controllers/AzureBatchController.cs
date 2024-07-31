@@ -37,7 +37,7 @@ namespace AzureBatchEndpoint.Controllers
         ///
         /// </remarks>
         [HttpPost]
-        public async Task<ActionResult<PreModelPrediction>> RunPrediction(UnpraisedDiamond unpraisedDiamond)
+        public async Task<ActionResult<PreModelPrediction>> RunPrediction(NotAppraisedDiamond unpraisedDiamond)
         {
             return await _azureMLBatchService.Predict(unpraisedDiamond);
         }

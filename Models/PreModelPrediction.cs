@@ -12,7 +12,7 @@ namespace AzureBatchEndpoint.Models
 
     public class PreModelPrediction : BaseModelPrediction
     {
-        public UnpraisedDiamond UnpraisedDiamond { get; set; }
+        public NotAppraisedDiamond UnpraisedDiamond { get; set; }
     }
 
     public class PostModelPrediction : BaseModelPrediction

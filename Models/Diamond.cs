@@ -1,6 +1,6 @@
 ﻿namespace AzureBatchEndpoint.Models
 {
-    public class UnpraisedDiamond
+    public class NotAppraisedDiamond
     {
         // 4Cs]
         public double Carat { get; set; }
@@ -9,7 +9,7 @@
         public string Cut { get; set; }
     }
 
-    public class Diamond : UnpraisedDiamond
+    public class Diamond : NotAppraisedDiamond
     {
         public int Price { get; set; }
 

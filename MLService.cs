@@ -9,7 +9,7 @@ namespace AzureBatchEndpoint
         private readonly AzureMLBatchClient _azureMLBatchClient = azureMLBatchClient;
         private readonly AzureStorageAccountClient _azureStorageAccountClient = azureStorageAccountClient;
 
-        public async Task<PreModelPrediction> Predict(UnpraisedDiamond unpraisedDiamond) 
+        public async Task<PreModelPrediction> Predict(NotAppraisedDiamond unpraisedDiamond) 
         {
             ValidateDiamond(unpraisedDiamond);
 
@@ -28,7 +28,7 @@ namespace AzureBatchEndpoint
             };
         }
 
-        public void ValidateDiamond(UnpraisedDiamond unpraisedDiamond) 
+        public void ValidateDiamond(NotAppraisedDiamond unpraisedDiamond) 
         {
 
             var allowedCuts = new List<string>() { "Fair", "Good", "Ideal", "Premium", "Very Good" };
@@ -41,7 +41,7 @@ namespace AzureBatchEndpoint
                 throw new Exception($"Submitted attributes for diamond is not accepted.");
         }
 
-        private async Task<string> ConvertAndUpload(UnpraisedDiamond unpraisedDiamond)
+        private async Task<string> ConvertAndUpload(NotAppraisedDiamond unpraisedDiamond)
         {
             using var csvData = ConvertAndFormatData(unpraisedDiamond);
 
@@ -52,7 +52,7 @@ namespace AzureBatchEndpoint
             return filepath;
         }
 
-        private static MemoryStream ConvertAndFormatData(UnpraisedDiamond unpraisedDiamond)
+        private static MemoryStream ConvertAndFormatData(NotAppraisedDiamond unpraisedDiamond)
         {
             var csvContent = new StringBuilder();
             csvContent.AppendLine("carat,cut,color,clarity,price");
