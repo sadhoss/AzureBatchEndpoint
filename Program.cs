@@ -20,8 +20,8 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "Diamond Praisal API",
-        Description = "This API allows for diamond price praisal. ",
+        Title = "Diamond Appraisal API",
+        Description = "This API allows for diamond price estimation. ",
     });
 
     // using System.Reflection;
