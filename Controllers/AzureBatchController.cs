@@ -29,10 +29,10 @@ namespace AzureBatchEndpoint.Controllers
         ///
         ///     POST 
         ///     {
-        ///        Carat : 0.5
-        ///        Clarity : VVS1
-        ///        Colour : H
-        ///        Cut : Fair
+        ///        "carat" : 0.5
+        ///        "clarity" : "VVS1"
+        ///        "colour" : "H"
+        ///        "cut" : "Fair"
         ///     }
         ///
         /// </remarks>
