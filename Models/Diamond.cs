@@ -1,17 +1,11 @@
-﻿using Swashbuckle.AspNetCore.Annotations;
-
-namespace AzureBatchEndpoint.Models
+﻿namespace AzureBatchEndpoint.Models
 {
     public class UnpraisedDiamond
     {
         // 4Cs]
-        [SwaggerSchema(Description = "Example = 0.5")]
         public double Carat { get; set; }
-        [SwaggerSchema(Description = "Example = VVS2")]
         public string Clarity { get; set; }
-        [SwaggerSchema(Description = "Example = E")]
         public string Colour { get; set; }
-        [SwaggerSchema(Description = "Example = Fair")]
         public string Cut { get; set; }
     }
 

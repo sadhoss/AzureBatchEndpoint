@@ -1,6 +1,5 @@
 using AzureBatchEndpoint.Models;
 using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
 
 namespace AzureBatchEndpoint.Controllers
 {
@@ -15,6 +14,17 @@ namespace AzureBatchEndpoint.Controllers
         /// Use the RunPrediction with appropriate diamond attributes (4Cs) to get an apraisal. Overview of accepted attribute values https://4cs.gia.edu/en-us/blog/gia-diamond-grading-scales/
         /// </summary>
         /// <remarks>
+        /// Dataset contains following values, attributes are limited accordingly.
+        /// Carat
+        ///     - [0.2 -> 5.01]
+        /// Clarity
+        ///     - [I1, IF, SI1, SI2, VS1, VS2, VVS1, VVS2]
+        /// Colour
+        ///     - [D -> j]
+        /// Cut
+        ///     - [Fair, Good, Ideal, Premium, Very Good]
+        ///     
+        /// 
         /// Sample request:
         ///
         ///     POST 

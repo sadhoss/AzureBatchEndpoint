@@ -11,6 +11,8 @@ namespace AzureBatchEndpoint
 
         public async Task<PreModelPrediction> Predict(UnpraisedDiamond unpraisedDiamond) 
         {
+            ValidateDiamond(unpraisedDiamond);
+
             var filepath = await ConvertAndUpload(unpraisedDiamond);
             var jobId = await _azureMLBatchClient.InvokeBatchEndpoint(filepath);
 
@@ -24,6 +26,19 @@ namespace AzureBatchEndpoint
                 PredictionStatus = "Pending",
                 jobId = jobId ?? ""
             };
+        }
+
+        public void ValidateDiamond(UnpraisedDiamond unpraisedDiamond) 
+        {
+
+            var allowedCuts = new List<string>() { "Fair", "Good", "Ideal", "Premium", "Very Good" };
+            var allowedColours = new List<string>() { "D", "E", "F", "G", "H", "I", "J" };
+            var allowedClarity = new List<string>() { "I1", "IF", "SI1", "SI2", "VS1", "VS2", "VVS1", "VVS2" };
+
+            if (!allowedCuts.Select(x => x.ToLower()).Contains(unpraisedDiamond.Cut.ToLower()) ||
+                !allowedColours.Select(x => x.ToLower()).Contains(unpraisedDiamond.Colour.ToLower()) ||
+                !allowedClarity.Select(x => x.ToLower()).Contains(unpraisedDiamond.Clarity.ToLower()))
+                throw new Exception($"Submitted attributes for diamond is not accepted.");
         }
 
         private async Task<string> ConvertAndUpload(UnpraisedDiamond unpraisedDiamond)

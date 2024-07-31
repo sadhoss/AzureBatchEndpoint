@@ -26,12 +26,13 @@ The rest endpoint will access the data, process it and save the output either at
 
 ---
 
-## Example Case for Context (Expandable content below)
+## Example Case for Context (Expandable content)
 <details>
 
 <summary>Repository example case: Diamond Pricing Estimation</summary>
 
 ### Repository example case: Diamond Pricing Estimation
+I recently got engaged 🎉, and read a lot about the 4Cs of 💍. So, here is a diamond dataset from [Joebeachcapital | Kaggle](https://www.kaggle.com/datasets/joebeachcapital/diamonds?resource=download). The data includes the 4Cs and some other parameters, including price. Let’s test Azure Batch Endpoint on estimating diamond prices based on the 4Cs.
 
 #### Model training 
 The process of splitting the data and training a model is not the focus point in this article, but the general gist is as follows:
