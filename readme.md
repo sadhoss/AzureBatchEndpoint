@@ -5,8 +5,8 @@
 
 
 #### Service temporarily available for testing
-If you want to test this service with the below example case (Diamond apraisal) you can navigate to this "site": [Swagger | dAImond ](https://daimond-e0agegaxajezd9bx.norwayeast-01.azurewebsites.net/swagger/index.html).  
-Here you can use the API to aprais diamonds based on its 4Cs. Service available for now. 
+If you want to test this service with the below example case (Diamond appraisal) you can navigate to this "site": [Swagger | dAImond ](https://daimond-e0agegaxajezd9bx.norwayeast-01.azurewebsites.net/swagger/index.html).  
+Here you can use the API to appraise diamonds based on its 4Cs. Service available for now. 
 
 <br>  
 

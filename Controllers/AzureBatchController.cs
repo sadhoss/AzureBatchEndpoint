@@ -11,7 +11,7 @@ namespace AzureBatchEndpoint.Controllers
         private readonly MLService _azureMLBatchService = azureMLBatchService;
 
         /// <summary>
-        /// Use the RunPrediction with appropriate diamond attributes (4Cs) to get an apraisal. Overview of accepted attribute values https://4cs.gia.edu/en-us/blog/gia-diamond-grading-scales/
+        /// Use the RunPrediction with appropriate diamond attributes (4Cs) to get an appraisal. Overview of accepted attribute values https://4cs.gia.edu/en-us/blog/gia-diamond-grading-scales/
         /// </summary>
         /// <remarks>
         /// Dataset contains following values, attributes are limited accordingly.
