@@ -3,11 +3,12 @@
 #### TL:DR  
 >This repo includes an example on how to deploy and integrate the usage of an ml model using .Net. Probably the most cost effective cloud deployment strategy for your ml model! Hosted by Azure, serverless, and invokable by rest! Best part, swapping a model is as easy as swapping a URL!  
 
-<br> 
 
 #### Service temporarily available for testing
 If you want to test this service with the below example case (Diamond apraisal) you can navigate to this "site": [Swagger | dAImond ](https://daimond-e0agegaxajezd9bx.norwayeast-01.azurewebsites.net/swagger/index.html).  
 Here you can use the API to aprais diamonds based on its 4Cs. Service available for now. 
+
+<br>  
 
 
 #### Deploy Technology | Azure ML Batch Endpoint    
