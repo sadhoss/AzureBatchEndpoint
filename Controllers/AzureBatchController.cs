@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AzureBatchEndpoint.Controllers
 {
     [ApiController]
-    [Route("api/AzureBatchEndpoint/[action]")]
+    [Route("[action]")]
 
     public class AzureBatchController(ILogger<AzureBatchController> logger, MLService azureMLBatchService) : ControllerBase
     {
